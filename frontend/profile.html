@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231C1C1C'/><polyline points='22,78 22,22 50,78 50,22' fill='none' stroke='%23E8C96A' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/><circle cx='65' cy='24' r='8' fill='%23E8C96A'/></svg>">
+    <title>Profil - NokiPay</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <a href="index.html" class="sidebar-logo">
+                <h2>Noki<span>Pay</span></h2>
+            </a>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="cryptos.html" class="nav-item">
+                    <span class="nav-icon">₿</span>
+                    <span>Cryptomonnaies</span>
+                </a>
+                <a href="orders.html" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span>Commandes</span>
+                </a>
+                <a href="profile.html" class="nav-item active">
+                    <span class="nav-icon">👤</span>
+                    <span>Profil</span>
+                </a>
+            </nav>
+            <button class="logout-btn" id="logout-btn">
+                <span>🚪</span>
+                <span>Déconnexion</span>
+            </button>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dash-header">
+                <div class="dash-header-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle">☰</button>
+                    <div>
+                        <h3>Mon profil</h3>
+                        <p>Gérez vos informations personnelles</p>
+                    </div>
+                </div>
+                <div class="dash-header-right">
+                    <div class="user-avatar" id="user-avatar">?</div>
+                </div>
+            </header>
+
+            <div class="profile-grid">
+                <!-- Carte profil -->
+                <div class="profile-card">
+                    <div class="profile-avatar-big" id="profile-avatar-big">??</div>
+                    <h3 id="profile-fullname">Chargement...</h3>
+                    <p id="profile-email" class="profile-email">--</p>
+                    <span class="badge" id="profile-pays">--</span>
+                </div>
+
+                <!-- Formulaire modification -->
+                <div class="profile-form-card">
+                    <h4>Modifier mes informations</h4>
+                    <form id="profile-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nom</label>
+                                <input type="text" id="profile-nom" placeholder="Votre nom" />
+                            </div>
+                            <div class="form-group">
+                                <label>Prénom</label>
+                                <input type="text" id="profile-prenom" placeholder="Votre prénom" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Adresse email</label>
+                            <input type="email" id="profile-email-input" placeholder="Votre email" />
+                        </div>
+                        <div class="form-group">
+                            <label>Pays</label>
+                            <select id="profile-pays-select">
+                                <option value="CG">🇨🇬 République du Congo</option>
+                                <option value="CD">🇨🇩 RD Congo</option>
+                                <option value="CM">🇨🇲 Cameroun</option>
+                                <option value="SN">🇸🇳 Sénégal</option>
+                                <option value="CI">🇨🇮 Côte d'Ivoire</option>
+                                <option value="GA">🇬🇦 Gabon</option>
+                                <option value="NG">🇳🇬 Nigeria</option>
+                                <option value="GH">🇬🇭 Ghana</option>
+                                <option value="FR">🇫🇷 France</option>
+                                <option value="BE">🇧🇪 Belgique</option>
+                                <option value="CA">🇨🇦 Canada</option>
+                                <option value="US">🇺🇸 États-Unis</option>
+                                <option value="OTHER">🌍 Autre</option>
+                            </select>
+                        </div>
+                        <div id="profile-message"></div>
+                        <button type="submit" class="btn-primary btn-full" data-label="Enregistrer les modifications">Enregistrer les modifications</button>
+                    </form>
+                </div>
+
+                <!-- Changer mot de passe -->
+                <div class="profile-form-card">
+                    <h4>Changer le mot de passe</h4>
+                    <form id="password-form">
+                        <div class="form-group">
+                            <label>Mot de passe actuel</label>
+                            <div class="input-password">
+                                <input type="password" id="current-password" placeholder="Mot de passe actuel" />
+                                <span class="toggle-pw" id="toggle-current">👁</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Nouveau mot de passe</label>
+                            <div class="input-password">
+                                <input type="password" id="new-password" placeholder="Nouveau mot de passe" />
+                                <span class="toggle-pw" id="toggle-new">👁</span>
+                            </div>
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strength-fill"></div>
+                            </div>
+                            <small class="strength-label" id="strength-label"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirmer le nouveau mot de passe</label>
+                            <div class="input-password">
+                                <input type="password" id="confirm-new-password" placeholder="Confirmer" />
+                                <span class="toggle-pw" id="toggle-confirm-new">👁</span>
+                            </div>
+                            <small class="match-label" id="match-label"></small>
+                        </div>
+                        <div id="password-message"></div>
+                        <button type="submit" class="btn-primary btn-full" data-label="Changer le mot de passe">Changer le mot de passe</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <nav class="mobile-nav">
+        <a href="dashboard.html" class="mobile-nav-item">
+            <span>📊</span>
+            <small>Dashboard</small>
+        </a>
+        <a href="cryptos.html" class="mobile-nav-item">
+            <span>₿</span>
+            <small>Cryptos</small>
+        </a>
+        <a href="orders.html" class="mobile-nav-item">
+            <span>📋</span>
+            <small>Commandes</small>
+        </a>
+        <a href="profile.html" class="mobile-nav-item active">
+            <span>👤</span>
+            <small>Profil</small>
+        </a>
+    </nav>
+
+    <script src="pages.js"></script>
+</body>
+</html>

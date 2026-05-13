@@ -1,0 +1,429 @@
+/* Filtres */
+.filters-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.filter-input {
+    background: #1C1C1C;
+    border: 1px solid rgba(232, 201, 106, 0.2);
+    border-radius: 10px;
+    padding: 10px 16px;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    width: 280px;
+    transition: border 0.2s ease;
+}
+
+.filter-input:focus {
+    border-color: rgba(232, 201, 106, 0.6);
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+}
+
+.filter-tab {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #8A8578;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.filter-tab:hover {
+    border-color: rgba(232, 201, 106, 0.4);
+    color: #E8C96A;
+}
+
+.filter-tab.active {
+    background: rgba(232, 201, 106, 0.12);
+    border-color: rgba(232, 201, 106, 0.4);
+    color: #E8C96A;
+    font-weight: 600;
+}
+
+/* Table cryptos full */
+.crypto-full-table {
+    background: #1C1C1C;
+    border: 1px solid rgba(232, 201, 106, 0.1);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.crypto-full-table .crypto-row {
+    display: grid;
+    grid-template-columns: 40px 2fr 1fr 1fr 1.5fr 1fr;
+    padding: 14px 20px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background 0.2s ease;
+}
+
+.crypto-full-table .crypto-row:last-child {
+    border-bottom: none;
+}
+
+.crypto-full-table .crypto-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.crypto-full-table .crypto-row-head {
+    background: rgba(232, 201, 106, 0.06);
+    color: #8A8578;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.crypto-full-table .crypto-row span {
+    color: #fff;
+    font-size: 14px;
+}
+
+.crypto-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.crypto-name img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.crypto-name-text strong {
+    color: #fff;
+    font-size: 14px;
+    display: block;
+}
+
+.crypto-name-text small {
+    color: #8A8578;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.positive { color: #4CAF50 !important; }
+.negative { color: #F44336 !important; }
+
+.btn-buy {
+    background: rgba(232, 201, 106, 0.12);
+    border: 1px solid rgba(232, 201, 106, 0.3);
+    border-radius: 8px;
+    padding: 6px 14px;
+    color: #E8C96A;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.btn-buy:hover {
+    background: rgba(232, 201, 106, 0.2);
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 500;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal {
+    background: #1C1C1C;
+    border: 1px solid rgba(232, 201, 106, 0.2);
+    border-radius: 20px;
+    padding: 32px;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 16px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h4 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: #8A8578;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+.modal-crypto-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    padding: 12px 16px;
+}
+
+.modal-crypto-info img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.modal-crypto-info .crypto-price {
+    color: #E8C96A;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.modal-crypto-info .crypto-label {
+    color: #8A8578;
+    font-size: 12px;
+}
+
+.type-tabs {
+    display: flex;
+    gap: 8px;
+}
+
+.type-tab {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
+    color: #8A8578;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.type-tab.active {
+    background: rgba(232, 201, 106, 0.12);
+    border-color: rgba(232, 201, 106, 0.4);
+    color: #E8C96A;
+    font-weight: 600;
+}
+
+.total-estimate {
+    background: rgba(232, 201, 106, 0.08);
+    border: 1px solid rgba(232, 201, 106, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #E8C96A;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.order-message {
+    font-size: 13px;
+    padding: 10px 14px;
+    border-radius: 8px;
+}
+
+/* Profile */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+}
+
+.profile-card {
+    background: #1C1C1C;
+    border: 1px solid rgba(232, 201, 106, 0.15);
+    border-radius: 16px;
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    grid-row: 1 / 3;
+}
+
+.profile-avatar-big {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(232, 201, 106, 0.15);
+    border: 3px solid #E8C96A;
+    color: #E8C96A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.profile-card h3 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.profile-email {
+    color: #8A8578;
+    font-size: 13px;
+}
+
+.profile-form-card {
+    background: #1C1C1C;
+    border: 1px solid rgba(232, 201, 106, 0.1);
+    border-radius: 16px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-form-card h4 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #8A8578;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    background: #2a2a2a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: border 0.2s ease;
+    width: 100%;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: rgba(232, 201, 106, 0.6);
+}
+
+.form-group select option {
+    background: #2a2a2a;
+}
+
+.input-password {
+    position: relative;
+}
+
+.input-password input {
+    padding-right: 42px;
+}
+
+.toggle-pw {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.toggle-pw:hover { opacity: 1; }
+
+.strength-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 4px;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.strength-label {
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.match-label {
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+    .filters-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filter-input {
+        width: 100%;
+    }
+
+    .filter-tabs {
+        flex-wrap: wrap;
+    }
+
+    .crypto-full-table .crypto-row {
+        grid-template-columns: 30px 2fr 1fr 1fr;
+    }
+
+    .crypto-full-table .crypto-row span:nth-child(5),
+    .crypto-full-table .crypto-row span:nth-child(6) {
+        display: none;
+    }
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card {
+        grid-row: auto;
+    }
+}

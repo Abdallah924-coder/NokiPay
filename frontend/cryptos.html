@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231C1C1C'/><polyline points='22,78 22,22 50,78 50,22' fill='none' stroke='%23E8C96A' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/><circle cx='65' cy='24' r='8' fill='%23E8C96A'/></svg>">
+    <title>Cryptomonnaies - NokiPay</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <a href="index.html" class="sidebar-logo">
+                <h2>Noki<span>Pay</span></h2>
+            </a>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="cryptos.html" class="nav-item active">
+                    <span class="nav-icon">₿</span>
+                    <span>Cryptomonnaies</span>
+                </a>
+                <a href="orders.html" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span>Commandes</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <span class="nav-icon">👤</span>
+                    <span>Profil</span>
+                </a>
+            </nav>
+            <button class="logout-btn" id="logout-btn">
+                <span>🚪</span>
+                <span>Déconnexion</span>
+            </button>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dash-header">
+                <div class="dash-header-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle">☰</button>
+                    <div>
+                        <h3>Cryptomonnaies</h3>
+                        <p>Prix en temps réel — mis à jour toutes les 60s</p>
+                    </div>
+                </div>
+                <div class="dash-header-right">
+                    <div class="user-avatar" id="user-avatar">?</div>
+                </div>
+            </header>
+
+            <!-- Filtres -->
+            <div class="filters-bar">
+                <input type="text" id="search-crypto" placeholder="🔍 Rechercher une crypto..." class="filter-input" />
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">Toutes</button>
+                    <button class="filter-tab" data-filter="top10">Top 10</button>
+                    <button class="filter-tab" data-filter="gainers">Hausses</button>
+                    <button class="filter-tab" data-filter="losers">Baisses</button>
+                </div>
+            </div>
+
+            <!-- Table cryptos -->
+            <div class="crypto-full-table">
+                <div class="crypto-row crypto-row-head">
+                    <span>#</span>
+                    <span>Nom</span>
+                    <span>Prix</span>
+                    <span>24h</span>
+                    <span>Cap. marché</span>
+                    <span>Action</span>
+                </div>
+                <div id="crypto-full-list">
+                    <p class="loading-text">Chargement...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal achat/vente -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h4 id="modal-title">Acheter Bitcoin</h4>
+                <button class="modal-close" id="modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-crypto-info" id="modal-crypto-info"></div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <div class="type-tabs">
+                        <button class="type-tab active" data-type="achat">Acheter</button>
+                        <button class="type-tab" data-type="vente">Vendre</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Quantité</label>
+                    <input type="number" id="order-amount" placeholder="Ex: 0.5" step="0.0001" min="0" />
+                </div>
+                <div class="form-group">
+                    <label>Total estimé</label>
+                    <div class="total-estimate" id="total-estimate">$0.00</div>
+                </div>
+                <div id="order-message"></div>
+                <button class="btn-primary btn-full" id="confirm-order">Confirmer la commande</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="mobile-nav">
+        <a href="dashboard.html" class="mobile-nav-item">
+            <span>📊</span>
+            <small>Dashboard</small>
+        </a>
+        <a href="cryptos.html" class="mobile-nav-item active">
+            <span>₿</span>
+            <small>Cryptos</small>
+        </a>
+        <a href="orders.html" class="mobile-nav-item">
+            <span>📋</span>
+            <small>Commandes</small>
+        </a>
+        <a href="profile.html" class="mobile-nav-item">
+            <span>👤</span>
+            <small>Profil</small>
+        </a>
+    </nav>
+
+    <script src="pages.js"></script>
+</body>
+</html>

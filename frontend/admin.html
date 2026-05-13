@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231C1C1C'/><polyline points='22,78 22,22 50,78 50,22' fill='none' stroke='%23E8C96A' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/><circle cx='65' cy='24' r='8' fill='%23E8C96A'/></svg>">
+    <title>Panel Admin - NokiPay</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <a href="index.html" class="sidebar-logo">
+                <h2>Noki<span>Pay</span></h2>
+            </a>
+            <div class="admin-badge">👑 Admin</div>
+            <nav class="sidebar-nav">
+                <a href="admin.html" class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    <span>Vue générale</span>
+                </a>
+                <a href="#" class="nav-item" id="nav-users">
+                    <span class="nav-icon">👥</span>
+                    <span>Utilisateurs</span>
+                </a>
+                <a href="#" class="nav-item" id="nav-orders">
+                    <span class="nav-icon">📋</span>
+                    <span>Commandes</span>
+                </a>
+            </nav>
+            <button class="logout-btn" id="logout-btn">
+                <span>🚪</span>
+                <span>Déconnexion</span>
+            </button>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dash-header">
+                <div class="dash-header-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle">☰</button>
+                    <div>
+                        <h3 id="admin-title">Vue générale</h3>
+                        <p id="admin-date"></p>
+                    </div>
+                </div>
+                <div class="dash-header-right">
+                    <div class="user-avatar" id="user-avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Vue générale -->
+            <div id="view-overview">
+                <section class="dash-stats">
+                    <div class="stat-card">
+                        <p class="stat-card-label">Utilisateurs</p>
+                        <h3 class="stat-card-value" id="stat-users">0</h3>
+                        <p class="stat-card-sub">Inscrits au total</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-card-label">Commandes</p>
+                        <h3 class="stat-card-value" id="stat-orders">0</h3>
+                        <p class="stat-card-sub">Achats, ventes et échanges</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-card-label">En cours</p>
+                        <h3 class="stat-card-value" id="stat-pending">0</h3>
+                        <p class="stat-card-sub">À traiter</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-card-label">Volume total</p>
+                        <h3 class="stat-card-value" id="stat-volume">$0</h3>
+                        <p class="stat-card-sub">Toutes transactions</p>
+                    </div>
+                </section>
+
+                <section class="dash-section">
+                    <div class="section-header">
+                        <h4>Commandes récentes</h4>
+                        <button class="btn-secondary-small" id="btn-all-orders">Voir toutes →</button>
+                    </div>
+                    <div class="orders-table">
+                        <div class="orders-head admin-orders-head">
+                            <span>Utilisateur</span>
+                            <span>Détail</span>
+                            <span>Type</span>
+                            <span>USD</span>
+                            <span>Statut</span>
+                            <span>Action</span>
+                        </div>
+                        <div id="recent-orders-list">
+                            <p class="loading-text">Chargement...</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Vue utilisateurs -->
+            <div id="view-users" style="display:none;">
+                <div class="filters-bar" style="margin-bottom:20px;">
+                    <input type="text" id="search-users" placeholder="🔍 Rechercher un utilisateur..." class="filter-input" />
+                </div>
+                <div class="orders-table">
+                    <div class="orders-head admin-users-head">
+                        <span>Nom</span>
+                        <span>Email</span>
+                        <span>Pays</span>
+                        <span>Rôle</span>
+                        <span>Inscrit le</span>
+                        <span>Action</span>
+                    </div>
+                    <div id="users-list">
+                        <p class="loading-text">Chargement...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vue commandes -->
+            <div id="view-orders" style="display:none;">
+                <div class="filters-bar" style="margin-bottom:20px;">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">Toutes</button>
+                        <button class="filter-tab" data-filter="pending">En attente</button>
+                        <button class="filter-tab" data-filter="validated">Confirmées</button>
+                        <button class="filter-tab" data-filter="rejected">Rejetées</button>
+                    </div>
+                </div>
+                <div class="orders-table">
+                    <div class="orders-head admin-orders-head">
+                        <span>Utilisateur</span>
+                        <span>Détail</span>
+                        <span>Type</span>
+                        <span>USD</span>
+                        <span>Statut</span>
+                        <span>Action</span>
+                    </div>
+                    <div id="all-orders-list">
+                        <p class="loading-text">Chargement...</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

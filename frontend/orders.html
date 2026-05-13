@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231C1C1C'/><polyline points='22,78 22,22 50,78 50,22' fill='none' stroke='%23E8C96A' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/><circle cx='65' cy='24' r='8' fill='%23E8C96A'/></svg>">
+    <title>Commandes - NokiPay</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <a href="index.html" class="sidebar-logo">
+                <h2>Noki<span>Pay</span></h2>
+            </a>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="cryptos.html" class="nav-item">
+                    <span class="nav-icon">₿</span>
+                    <span>Cryptomonnaies</span>
+                </a>
+                <a href="orders.html" class="nav-item active">
+                    <span class="nav-icon">📋</span>
+                    <span>Commandes</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <span class="nav-icon">👤</span>
+                    <span>Profil</span>
+                </a>
+            </nav>
+            <button class="logout-btn" id="logout-btn">
+                <span>🚪</span>
+                <span>Déconnexion</span>
+            </button>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dash-header">
+                <div class="dash-header-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle">☰</button>
+                    <div>
+                        <h3>Mes transactions</h3>
+                        <p>Historique complet de vos achats, ventes et échanges</p>
+                    </div>
+                </div>
+                <div class="dash-header-right">
+                    <div class="user-avatar" id="user-avatar">?</div>
+                </div>
+            </header>
+
+            <!-- Stats commandes -->
+            <div class="dash-stats">
+                <div class="stat-card">
+                    <p class="stat-card-label">Total commandes</p>
+                    <h3 class="stat-card-value" id="orders-total">0</h3>
+                    <p class="stat-card-sub">Toutes transactions</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-card-label">En cours</p>
+                    <h3 class="stat-card-value" id="orders-encours">0</h3>
+                    <p class="stat-card-sub">En attente</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-card-label">Traitées</p>
+                    <h3 class="stat-card-value" id="orders-traites">0</h3>
+                    <p class="stat-card-sub">Confirmées</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-card-label">Volume total</p>
+                    <h3 class="stat-card-value" id="orders-volume">$0</h3>
+                    <p class="stat-card-sub">Tous types confondus</p>
+                </div>
+            </div>
+
+            <!-- Filtres -->
+            <div class="filters-bar">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">Toutes</button>
+                    <button class="filter-tab" data-filter="pending">En attente</button>
+                    <button class="filter-tab" data-filter="validated">Confirmées</button>
+                    <button class="filter-tab" data-filter="rejected">Rejetées</button>
+                </div>
+            </div>
+
+            <!-- Table commandes -->
+            <div class="orders-table">
+                <div class="orders-head">
+                    <span>Actif</span>
+                    <span>Type</span>
+                    <span>Montant</span>
+                    <span>USD</span>
+                    <span>Statut</span>
+                    <span>Date</span>
+                </div>
+                <div id="orders-full-list">
+                    <p class="loading-text">Chargement...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <nav class="mobile-nav">
+        <a href="dashboard.html" class="mobile-nav-item">
+            <span>📊</span>
+            <small>Dashboard</small>
+        </a>
+        <a href="cryptos.html" class="mobile-nav-item">
+            <span>₿</span>
+            <small>Cryptos</small>
+        </a>
+        <a href="orders.html" class="mobile-nav-item active">
+            <span>📋</span>
+            <small>Commandes</small>
+        </a>
+        <a href="profile.html" class="mobile-nav-item">
+            <span>👤</span>
+            <small>Profil</small>
+        </a>
+    </nav>
+
+    <script src="pages.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231C1C1C'/><polyline points='22,78 22,22 50,78 50,22' fill='none' stroke='%23E8C96A' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/><circle cx='65' cy='24' r='8' fill='%23E8C96A'/></svg>">
+    <title>Réinitialisation - NokiPay</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-left">
+            <a href="index.html" class="name"><h1>Noki<span>Pay</span></h1></a>
+            <h2>Réinitialisez votre mot de passe.</h2>
+            <p>Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.</p>
+            <div class="auth-features">
+                <div class="auth-feature">
+                    <span>📧</span>
+                    <p>Lien envoyé par email</p>
+                </div>
+                <div class="auth-feature">
+                    <span>⏱️</span>
+                    <p>Valable 15 minutes</p>
+                </div>
+                <div class="auth-feature">
+                    <span>🔐</span>
+                    <p>Processus 100% sécurisé</p>
+                </div>
+            </div>
+        </div>
+        <div class="auth-right">
+            <div class="auth-card">
+                <h3>Mot de passe oublié</h3>
+                <p class="auth-subtitle">Vous vous souvenez ? <a href="login.html">Se connecter</a></p>
+
+                <form id="reset-form">
+                    <div class="form-group">
+                        <label>Adresse email</label>
+                        <input type="email" id="reset-email" placeholder="jean@exemple.com" />
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-full">Envoyer le lien</button>
+                </form>
+
+                <div id="reset-success" class="reset-success" style="display:none;">
+                    <span>✅</span>
+                    <p>Un lien de réinitialisation a été envoyé à votre adresse email.</p>
+                    <a href="login.html">Retour à la connexion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+</body>
+</html>

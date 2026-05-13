@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231C1C1C'/><polyline points='22,78 22,22 50,78 50,22' fill='none' stroke='%23E8C96A' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/><circle cx='65' cy='24' r='8' fill='%23E8C96A'/></svg>">
+    <title>Connexion - NokiPay</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-left">
+            <a href="index.html" class="name"><h1>Noki<span>Pay</span></h1></a>
+            <h2>Bon retour parmi nous.</h2>
+            <p>Connectez-vous pour accéder à votre wallet et gérer vos cryptomonnaies.</p>
+            <div class="auth-features">
+                <div class="auth-feature">
+                    <span>📊</span>
+                    <p>Suivez vos actifs en temps réel</p>
+                </div>
+                <div class="auth-feature">
+                    <span>🔄</span>
+                    <p>Échangez en quelques secondes</p>
+                </div>
+                <div class="auth-feature">
+                    <span>🛡️</span>
+                    <p>Vos fonds toujours sécurisés</p>
+                </div>
+            </div>
+        </div>
+        <div class="auth-right">
+            <div class="auth-card">
+                <h3>Se connecter</h3>
+                <p class="auth-subtitle">Pas encore inscrit ? <a href="register.html">Créer un compte</a></p>
+
+                <button class="google-btn">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+                    Continuer avec Google
+                </button>
+
+                <div class="auth-divider">
+                    <span>ou</span>
+                </div>
+
+                <form id="login-form">
+                    <div class="form-group">
+                        <label>Adresse email</label>
+                        <input type="email" id="email" placeholder="jean@exemple.com" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <div class="input-password">
+                            <input type="password" id="password" placeholder="Votre mot de passe" />
+                            <span class="toggle-pw" id="toggle-pw">👁</span>
+                        </div>
+                    </div>
+
+                    <div class="form-forgot">
+                        <a href="reset.html">Mot de passe oublié ?</a>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-full">Se connecter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+</body>
+</html>

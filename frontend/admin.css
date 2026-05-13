@@ -1,0 +1,204 @@
+.admin-badge {
+    background: rgba(232, 201, 106, 0.12);
+    border: 1px solid rgba(232, 201, 106, 0.3);
+    border-radius: 8px;
+    padding: 6px 14px;
+    color: #E8C96A;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.admin-orders-head {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr !important;
+}
+
+.admin-users-head {
+    display: grid !important;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1.5fr 1fr !important;
+}
+
+.admin-order-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 14px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    align-items: center;
+    transition: background 0.2s ease;
+}
+
+.admin-user-row {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1.5fr 1fr;
+    padding: 14px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    align-items: center;
+    transition: background 0.2s ease;
+}
+
+.admin-order-row:hover,
+.admin-user-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.admin-order-row span,
+.admin-user-row span {
+    color: #fff;
+    font-size: 14px;
+}
+
+.admin-user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(232, 201, 106, 0.15);
+    color: #E8C96A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.admin-user-name {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.admin-user-email {
+    color: #8A8578;
+    font-size: 12px;
+}
+
+.btn-secondary-small {
+    background: transparent;
+    border: 1px solid rgba(232, 201, 106, 0.3);
+    border-radius: 8px;
+    padding: 6px 14px;
+    color: #E8C96A;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary-small:hover {
+    background: rgba(232, 201, 106, 0.08);
+}
+
+.status-select {
+    background: #2a2a2a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 6px 10px;
+    color: #fff;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.status-select:focus {
+    border-color: rgba(232, 201, 106, 0.5);
+}
+
+.role-badge-admin {
+    background: rgba(232, 201, 106, 0.12);
+    color: #E8C96A;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.role-badge-user {
+    background: rgba(138, 133, 120, 0.12);
+    color: #8A8578;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.filter-input {
+    background: #1C1C1C;
+    border: 1px solid rgba(232, 201, 106, 0.2);
+    border-radius: 10px;
+    padding: 10px 16px;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    width: 300px;
+    transition: border 0.2s ease;
+}
+
+.filter-input:focus {
+    border-color: rgba(232, 201, 106, 0.6);
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+}
+
+.filter-tab {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #8A8578;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.filter-tab:hover {
+    border-color: rgba(232, 201, 106, 0.4);
+    color: #E8C96A;
+}
+
+.filter-tab.active {
+    background: rgba(232, 201, 106, 0.12);
+    border-color: rgba(232, 201, 106, 0.4);
+    color: #E8C96A;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .admin-orders-head,
+    .admin-order-row {
+        grid-template-columns: 2fr 1fr 1fr 1fr !important;
+    }
+
+    .admin-orders-head span:nth-child(3),
+    .admin-orders-head span:nth-child(6),
+    .admin-order-row span:nth-child(3),
+    .admin-order-row span:nth-child(6) {
+        display: none;
+    }
+
+    .admin-users-head,
+    .admin-user-row {
+        grid-template-columns: 2fr 1fr 1fr !important;
+    }
+
+    .admin-users-head span:nth-child(2),
+    .admin-users-head span:nth-child(3),
+    .admin-users-head span:nth-child(5),
+    .admin-user-row span:nth-child(2),
+    .admin-user-row span:nth-child(3),
+    .admin-user-row span:nth-child(5) {
+        display: none;
+    }
+}

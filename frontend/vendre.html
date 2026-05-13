@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231C1C1C'/><polyline points='22,78 22,22 50,78 50,22' fill='none' stroke='%23E8C96A' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/><circle cx='65' cy='24' r='8' fill='%23E8C96A'/></svg>">
+    <title>Vendre - NokiPay</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="public-pages.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="name"><h1>Noki<span>Pay</span></h1></a>
+        <div class="hamb" id="hamb">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav id="nav">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#cryptomonnaies">Cryptomonnaies</a></li>
+                <li><a href="actualites.html">Actualités</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html">Espace client</a></li>
+            </ul>
+            <a href="commencer.html" class="nav-cta">Commencer</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-inner">
+                <span class="badge">💵 Vente</span>
+                <h1>Vendre vos <span>cryptos</span></h1>
+                <p>Choisissez votre crypto, le réseau, le montant à envoyer, puis déposez sur l’adresse affichée. Le calcul FCFA est basé sur un taux de 575 FCFA pour 1 dollar.</p>
+            </div>
+        </section>
+
+        <section class="content-section alt">
+            <div class="section-shell buy-layout">
+                <div class="buy-panel">
+                    <h2>Informations <span>de vente</span></h2>
+                    <form id="sell-form" class="buy-form">
+                        <div class="form-row-split">
+                            <div class="form-field">
+                                <label for="sell-email">Adresse mail</label>
+                                <input type="email" id="sell-email" placeholder="vous@exemple.com" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="sell-phone">Numéro de téléphone</label>
+                                <input type="tel" id="sell-phone" placeholder="06 000 00 00" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row-split">
+                            <div class="form-field">
+                                <label for="sell-crypto">Crypto à vendre</label>
+                                <select id="sell-crypto" required>
+                                    <option value="">Choisir une crypto</option>
+                                    <option value="USDT">USDT</option>
+                                    <option value="BTC">Bitcoin</option>
+                                    <option value="ETH">Ethereum</option>
+                                    <option value="BNB">BNB</option>
+                                    <option value="SOL">Solana</option>
+                                    <option value="XRP">XRP</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="sell-network">Réseau</label>
+                                <select id="sell-network" required>
+                                    <option value="">Choisir un réseau</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="sell-amount-crypto">Montant en crypto</label>
+                            <input type="number" id="sell-amount-crypto" min="0.000001" step="0.000001" placeholder="Ex: 0.5" required>
+                        </div>
+
+                        <div class="form-row-split">
+                            <div class="fcfa-box">
+                                <strong>Équivalent USD</strong>
+                                <div class="fcfa-value" id="sell-usd-value">$0.00</div>
+                            </div>
+                            <div class="fcfa-box">
+                                <strong>Vous recevez</strong>
+                                <div class="fcfa-value" id="sell-fcfa-value">0 FCFA</div>
+                            </div>
+                        </div>
+
+                        <div class="status-box">
+                            <strong>Adresse crypto à utiliser</strong>
+                            <p id="sell-deposit-address">Choisissez une crypto et un réseau.</p>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="sell-proof">Capture d’écran du dépôt</label>
+                            <input type="file" id="sell-proof" accept="image/*" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="sell-notes">Note complémentaire</label>
+                            <textarea id="sell-notes" placeholder="Ajoutez une précision utile si nécessaire."></textarea>
+                        </div>
+
+                        <div id="sell-message" class="message-box"></div>
+                        <button type="submit" class="btn-primary">Envoyer la demande de vente</button>
+                    </form>
+                </div>
+
+                <aside class="buy-summary">
+                    <h3>Après <span>la soumission</span></h3>
+                    <p>La transaction apparaît dans votre espace client et dans le panel admin. Un email vous est envoyé à la mise en attente puis à la confirmation.</p>
+                    <ul>
+                        <li><strong>1.</strong> Vous copiez l’adresse affichée selon la crypto et le réseau.</li>
+                        <li><strong>2.</strong> Vous déposez la crypto depuis votre wallet ou votre exchange.</li>
+                        <li><strong>3.</strong> Vous joignez la capture du dépôt.</li>
+                        <li><strong>4.</strong> L’équipe valide et procède au règlement FCFA.</li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-bottom" style="justify-content:center;">
+            <p>© 2025 NokiPay. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="buy.js"></script>
+</body>
+</html>

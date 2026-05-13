@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231C1C1C'/><polyline points='22,78 22,22 50,78 50,22' fill='none' stroke='%23E8C96A' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/><circle cx='65' cy='24' r='8' fill='%23E8C96A'/></svg>">
+    <title>Commande en attente - NokiPay</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="public-pages.css">
+</head>
+<body>
+    <main class="waiting-shell">
+        <div class="waiting-card">
+            <div class="waiting-pulse">⏳</div>
+            <span class="badge">Commande reçue</span>
+            <h1>Votre demande est <span>en attente</span></h1>
+            <p>Notre équipe vérifie le paiement, le réseau choisi et la destination de réception avant de finaliser l’envoi de la crypto.</p>
+            <ul class="status-list" id="waiting-summary">
+                <li>Chargement du résumé de votre commande...</li>
+            </ul>
+            <div class="cta-btns" style="justify-content:center;">
+                <a href="index.html" class="btn-secondary cta-link">Retour à l’accueil</a>
+                <a href="contact.html" class="btn-primary cta-link">Contacter le support</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="buy.js"></script>
+</body>
+</html>

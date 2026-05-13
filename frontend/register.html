@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231C1C1C'/><polyline points='22,78 22,22 50,78 50,22' fill='none' stroke='%23E8C96A' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/><circle cx='65' cy='24' r='8' fill='%23E8C96A'/></svg>">
+    <title>Inscription - NokiPay</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-left">
+            <a href="index.html" class="name"><h1>Noki<span>Pay</span></h1></a>
+            <h2>Rejoignez la révolution crypto en Afrique.</h2>
+            <p>Achetez, vendez et gérez vos cryptomonnaies en toute sécurité, où que vous soyez.</p>
+            <div class="auth-features">
+                <div class="auth-feature">
+                    <span>🔒</span>
+                    <p>Sécurité bancaire</p>
+                </div>
+                <div class="auth-feature">
+                    <span>⚡</span>
+                    <p>Transactions rapides</p>
+                </div>
+                <div class="auth-feature">
+                    <span>🌍</span>
+                    <p>Disponible partout</p>
+                </div>
+            </div>
+        </div>
+        <div class="auth-right">
+            <div class="auth-card">
+                <h3>Créer un compte</h3>
+                <p class="auth-subtitle">Déjà inscrit ? <a href="login.html">Se connecter</a></p>
+
+                <button class="google-btn">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+                    Continuer avec Google
+                </button>
+
+                <div class="auth-divider">
+                    <span>ou</span>
+                </div>
+
+                <form id="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nom</label>
+                            <input type="text" id="nom" placeholder="Dupont" />
+                        </div>
+                        <div class="form-group">
+                            <label>Prénom</label>
+                            <input type="text" id="prenom" placeholder="Jean" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Adresse email</label>
+                        <input type="email" id="email" placeholder="jean@exemple.com" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pays</label>
+                        <select id="pays">
+                            <option value="CG">🇨🇬 République du Congo</option>
+                            <option value="CD">🇨🇩 RD Congo</option>
+                            <option value="CM">🇨🇲 Cameroun</option>
+                            <option value="SN">🇸🇳 Sénégal</option>
+                            <option value="CI">🇨🇮 Côte d'Ivoire</option>
+                            <option value="GA">🇬🇦 Gabon</option>
+                            <option value="BJ">🇧🇯 Bénin</option>
+                            <option value="TG">🇹🇬 Togo</option>
+                            <option value="ML">🇲🇱 Mali</option>
+                            <option value="BF">🇧🇫 Burkina Faso</option>
+                            <option value="NE">🇳🇪 Niger</option>
+                            <option value="TD">🇹🇩 Tchad</option>
+                            <option value="GN">🇬🇳 Guinée</option>
+                            <option value="MG">🇲🇬 Madagascar</option>
+                            <option value="NG">🇳🇬 Nigeria</option>
+                            <option value="GH">🇬🇭 Ghana</option>
+                            <option value="KE">🇰🇪 Kenya</option>
+                            <option value="ZA">🇿🇦 Afrique du Sud</option>
+                            <option value="MA">🇲🇦 Maroc</option>
+                            <option value="TN">🇹🇳 Tunisie</option>
+                            <option value="FR">🇫🇷 France</option>
+                            <option value="BE">🇧🇪 Belgique</option>
+                            <option value="CA">🇨🇦 Canada</option>
+                            <option value="US">🇺🇸 États-Unis</option>
+                            <option value="OTHER">🌍 Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <div class="input-password">
+                            <input type="password" id="password" placeholder="Minimum 8 caractères" />
+                            <span class="toggle-pw" id="toggle-pw">👁</span>
+                        </div>
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strength-fill"></div>
+                        </div>
+                        <small class="strength-label" id="strength-label"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirmer le mot de passe</label>
+                        <div class="input-password">
+                            <input type="password" id="confirm-password" placeholder="Répétez votre mot de passe" />
+                            <span class="toggle-pw" id="toggle-confirm">👁</span>
+                        </div>
+                        <small class="match-label" id="match-label"></small>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="cgu" />
+                        <label for="cgu">J'accepte les <a href="cgu.html">conditions d'utilisation</a> et la <a href="confidentialite.html">politique de confidentialité</a> de NokiPay.</label>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-full">Créer mon compte</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+</body>
+</html>

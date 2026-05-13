@@ -1,0 +1,456 @@
+.page-hero {
+    padding: 160px 60px 90px;
+    background: linear-gradient(180deg, #1c1c1c 0%, #141414 100%);
+    color: #fff;
+}
+
+.page-hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.page-hero-inner h1 {
+    font-size: 46px;
+    line-height: 1.15;
+}
+
+.page-hero-inner h1 span,
+.section-heading span,
+.flow-option h3 span,
+.contact-card h3 span,
+.buy-panel h2 span,
+.waiting-card h1 span {
+    color: #E8C96A;
+}
+
+.page-hero-inner p,
+.section-copy,
+.option-copy,
+.news-card p,
+.contact-card p,
+.contact-card li,
+.buy-panel p,
+.buy-summary p,
+.waiting-card p,
+.status-list li,
+.placeholder-card p {
+    color: #8A8578;
+    line-height: 1.7;
+}
+
+.content-section {
+    padding: 80px 60px;
+    background: #1c1c1c;
+}
+
+.content-section.alt {
+    background: #151515;
+}
+
+.section-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 36px;
+}
+
+.section-heading h2 {
+    color: #fff;
+    font-size: 36px;
+}
+
+.news-grid,
+.contact-grid,
+.flow-grid,
+.placeholder-grid {
+    display: grid;
+    gap: 24px;
+}
+
+.news-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.news-card,
+.contact-card,
+.flow-option,
+.buy-panel,
+.buy-summary,
+.waiting-card,
+.placeholder-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(232, 201, 106, 0.16);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
+}
+
+.news-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.news-meta,
+.info-badge {
+    width: fit-content;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(232, 201, 106, 0.12);
+    color: #E8C96A;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.news-card h3,
+.contact-card h3,
+.flow-option h3,
+.buy-panel h2,
+.buy-summary h3,
+.placeholder-card h3 {
+    color: #fff;
+    font-size: 24px;
+}
+
+.contact-grid,
+.placeholder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.contact-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.contact-card a {
+    color: #E8C96A;
+    text-decoration: none;
+}
+
+.contact-card a:hover {
+    text-decoration: underline;
+}
+
+.flow-section {
+    min-height: calc(100vh - 320px);
+    display: flex;
+    align-items: center;
+}
+
+.flow-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.flow-option {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    text-align: center;
+    align-items: center;
+}
+
+.flow-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    background: rgba(232, 201, 106, 0.14);
+    font-size: 30px;
+}
+
+.flow-option .btn-primary,
+.flow-option .btn-secondary,
+.news-card .btn-secondary,
+.contact-card .btn-secondary,
+.placeholder-card .btn-secondary {
+    width: 100%;
+}
+
+.buy-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.buy-form {
+    display: grid;
+    gap: 18px;
+}
+
+.form-row-split {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-field label {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(232, 201, 106, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    outline: none;
+}
+
+.form-field textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #8A8578;
+    font-size: 14px;
+}
+
+.form-check input {
+    margin-top: 4px;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+    color: #6f6b61;
+}
+
+.form-hint {
+    color: #8A8578;
+    font-size: 13px;
+}
+
+.fcfa-box,
+.status-box {
+    padding: 18px;
+    border-radius: 16px;
+    background: rgba(232, 201, 106, 0.09);
+    border: 1px solid rgba(232, 201, 106, 0.22);
+}
+
+.fcfa-box strong,
+.status-box strong {
+    display: block;
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.fcfa-value {
+    color: #E8C96A;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.status-box p,
+.buy-summary ul li,
+.buy-summary strong,
+.waiting-card strong {
+    color: #fff;
+}
+
+.payment-step {
+    display: none;
+}
+
+.payment-step.active {
+    display: block;
+}
+
+.step-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 8px 0;
+}
+
+.buy-summary ul,
+.status-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.buy-summary li,
+.status-list li {
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.buy-summary code {
+    color: #E8C96A;
+    font-size: 14px;
+}
+
+.message-box {
+    display: none;
+    padding: 14px 16px;
+    border-radius: 14px;
+    font-size: 14px;
+}
+
+.message-box.visible {
+    display: block;
+}
+
+.message-box.success {
+    background: rgba(76, 175, 80, 0.12);
+    color: #8ae39c;
+    border: 1px solid rgba(76, 175, 80, 0.25);
+}
+
+.message-box.error {
+    background: rgba(244, 67, 54, 0.12);
+    color: #ff9e98;
+    border: 1px solid rgba(244, 67, 54, 0.22);
+}
+
+.waiting-shell {
+    min-height: calc(100vh - 260px);
+    display: grid;
+    place-items: center;
+    padding-top: 140px;
+    padding-bottom: 80px;
+    background: radial-gradient(circle at top, rgba(232, 201, 106, 0.18), transparent 34%), #161616;
+}
+
+.waiting-card {
+    max-width: 720px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.waiting-pulse {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 2px solid rgba(232, 201, 106, 0.25);
+    display: grid;
+    place-items: center;
+    color: #E8C96A;
+    font-size: 34px;
+    box-shadow: 0 0 0 0 rgba(232, 201, 106, 0.28);
+    animation: waitingPulse 1.8s infinite;
+}
+
+@keyframes waitingPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(232, 201, 106, 0.28);
+    }
+    70% {
+        box-shadow: 0 0 0 24px rgba(232, 201, 106, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(232, 201, 106, 0);
+    }
+}
+
+.cta-link,
+.nav-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.nav-cta {
+    background: #E8C96A;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.whatsapp-float {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #25d366;
+    color: #fff;
+    text-decoration: none;
+    font-size: 30px;
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.32);
+    z-index: 1200;
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+    .news-grid,
+    .flow-grid,
+    .contact-grid,
+    .placeholder-grid,
+    .buy-layout,
+    .form-row-split {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-hero,
+    .content-section {
+        padding: 140px 25px 60px;
+    }
+
+    .content-section.alt {
+        padding-top: 60px;
+    }
+
+    .page-hero-inner h1 {
+        font-size: 34px;
+    }
+
+    .section-heading h2 {
+        font-size: 30px;
+    }
+
+    .whatsapp-float {
+        right: 18px;
+        bottom: 18px;
+        width: 56px;
+        height: 56px;
+        font-size: 26px;
+    }
+}
