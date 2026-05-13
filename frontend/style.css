@@ -13,19 +13,19 @@ img {
     max-width: 100%;
     display: block;
 }
-header .name {
+body > header .name {
     text-decoration: none;
 }
-header .name h1:hover {
+body > header .name h1:hover {
     color: #E8C96A;
 }
-header .name span {
+body > header .name span {
     color: #E8C96A;
 }
-header .name h1 {
+body > header .name h1 {
     color: #fff;
 }
-header {
+body > header {
     display: flex;
     justify-content: space-between;
     background: #1C1C1C;
@@ -37,19 +37,19 @@ header {
     z-index: 1000;
     left: 0;
 }
-nav {
+body > header nav {
     display: flex;
     gap: 25px;
     align-items: center;
 }
-nav ul {
+body > header nav ul {
     display: flex;
     list-style: none;
     align-items: center;
     gap: 10px;
 
 }
-nav ul li a {
+body > header nav ul li a {
     color: #8A8578;
     text-decoration: none;
     font-size: 18px;
@@ -57,7 +57,7 @@ nav ul li a {
     margin: 0 10px;
     transition: color 0.3s ease;
 }
-nav ul li a::after {
+body > header nav ul li a::after {
     content: "";
     position: absolute;
     left: 0;
@@ -70,21 +70,21 @@ nav ul li a::after {
     transition: transform 0.3s ease;
 
 }
-nav ul li a:hover {
+body > header nav ul li a:hover {
     color: #f5c542;
 }
-nav ul li a:hover::after {
+body > header nav ul li a:hover::after {
     transform: scale(1);
     transform-origin: left;
 }
-nav button {
+body > header nav button {
     background: #E8C96A;
     color: #000;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
 }
-nav.nav-open {
+body > header nav.nav-open {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -95,7 +95,7 @@ nav.nav-open {
     padding: 20px 25px;
     gap: 5px;
 }
-nav.nav-open ul {
+body > header nav.nav-open ul {
     flex-direction: column;
     align-items: flex-start;
 }
@@ -110,13 +110,13 @@ nav.nav-open ul {
 .hamb-open .line:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
 }
-.hamb {
+body > header .hamb {
     display: none;
     flex-direction: column;
     cursor: pointer;
     align-items: center;
 }
-.line {
+body > header .line {
     width: 25px;
     height: 3px;
     background: #fff;
@@ -125,13 +125,13 @@ nav.nav-open ul {
 
 }
 @media (max-width: 768px ) {
-    .hamb {
+    body > header .hamb {
         display: block;
     }
-    nav {
+    body > header nav {
         display: none;
     }
-    header {
+    body > header {
         display: flex;
         justify-content: space-between;
         align-items: center;
