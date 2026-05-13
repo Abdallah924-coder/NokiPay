@@ -134,7 +134,7 @@ async function postOrder(payload) {
     const data = await response.json();
     if (!response.ok) throw new Error(data.message || 'Erreur lors de la création de la transaction.');
     localStorage.setItem('nokipayPendingOrder', JSON.stringify(data.order));
-    window.location.href = 'attente.html';
+    window.location.href = '/attente';
 }
 
 async function initBuyPage() {

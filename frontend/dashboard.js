@@ -20,7 +20,7 @@ const token = localStorage.getItem('token');
 const userRaw = localStorage.getItem('user');
 
 if (!token || !userRaw) {
-    window.location.href = 'login.html';
+    window.location.href = '/login';
 }
 
 const user = JSON.parse(userRaw);
@@ -51,7 +51,7 @@ document.getElementById('welcome-date').textContent = now.toLocaleDateString('fr
 document.getElementById('logout-btn').addEventListener('click', () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    window.location.href = 'login.html';
+    window.location.href = '/login';
 });
 
 // Toggle sidebar mobile

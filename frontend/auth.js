@@ -27,9 +27,10 @@ function resolveApiBase() {
 
 const API = resolveApiBase();
 const existingToken = localStorage.getItem('token');
+const AUTH_PAGES = new Set(['/login', '/register', '/login.html', '/register.html']);
 
-if (existingToken && (window.location.pathname.endsWith('/login.html') || window.location.pathname.endsWith('/register.html') || /\/(login|register)\.html$/.test(window.location.pathname))) {
-    window.location.href = 'dashboard.html';
+if (existingToken && AUTH_PAGES.has(window.location.pathname)) {
+    window.location.href = '/dashboard';
 }
 
 // Récupérer token Google après callback
@@ -40,7 +41,7 @@ const googleUser = urlParams.get('user');
 if (googleToken && googleUser) {
     localStorage.setItem('token', googleToken);
     localStorage.setItem('user', googleUser);
-    window.location.href = 'dashboard.html';
+    window.location.href = '/dashboard';
 }
 
 // Toggle mot de passe
@@ -179,7 +180,7 @@ if (registerForm) {
             localStorage.setItem('user', JSON.stringify(data.user));
 
             showMessage('Compte créé ! Redirection...', 'success');
-            setTimeout(() => window.location.href = 'dashboard.html', 1500);
+            setTimeout(() => window.location.href = '/dashboard', 1500);
 
         } catch {
             showMessage('Impossible de contacter le serveur.');
@@ -220,7 +221,7 @@ if (loginForm) {
             localStorage.setItem('user', JSON.stringify(data.user));
 
             showMessage('Connexion réussie ! Redirection...', 'success');
-            setTimeout(() => window.location.href = 'dashboard.html', 1500);
+            setTimeout(() => window.location.href = '/dashboard', 1500);
 
         } catch {
             showMessage('Impossible de contacter le serveur.');
@@ -235,72 +236,82 @@ const resetForm = document.getElementById('reset-form');
 if (resetForm) {
     const submitBtn = resetForm.querySelector('button[type="submit"]');
     submitBtn.dataset.label = submitBtn.textContent;
+    let resetStep = 'request';
+    let resetEmail = '';
 
     resetForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const email = document.getElementById('reset-email').value.trim();
-        if (!email) return showMessage('Veuillez entrer votre adresse email.');
+        if (resetStep === 'request') {
+            const emailField = document.getElementById('reset-email');
+            const email = emailField?.value.trim();
+            if (!email) return showMessage('Veuillez entrer votre adresse email.');
 
-        setLoading(submitBtn, true);
+            setLoading(submitBtn, true);
+
+            try {
+                const res = await fetch(`${API}/auth/forgot-password`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email }),
+                });
+
+                const data = await res.json();
+                if (!res.ok) return showMessage(data.message || 'Erreur.');
+
+                resetEmail = email;
+                resetStep = 'confirm';
+                resetForm.innerHTML = `
+                    <div class="form-group">
+                        <label>Code OTP reçu par email</label>
+                        <input type="text" id="otp-code" placeholder="Ex: 483920" maxlength="6" />
+                    </div>
+                    <div class="form-group">
+                        <label>Nouveau mot de passe</label>
+                        <input type="password" id="new-password" placeholder="Minimum 8 caractères" />
+                    </div>
+                    <button type="submit" class="btn-primary btn-full">Réinitialiser</button>
+                `;
+
+                showMessage(`Code OTP envoyé à ${email}`, 'success');
+            } catch {
+                showMessage('Impossible de contacter le serveur.');
+            } finally {
+                setLoading(submitBtn, false);
+            }
+
+            return;
+        }
+
+        const otp = document.getElementById('otp-code')?.value.trim();
+        const newPassword = document.getElementById('new-password')?.value;
+
+        if (!otp || !newPassword) return showMessage('Veuillez remplir tous les champs.');
+
+        const confirmBtn = resetForm.querySelector('button[type="submit"]');
+        if (confirmBtn) {
+            confirmBtn.dataset.label = confirmBtn.textContent;
+            setLoading(confirmBtn, true);
+        }
 
         try {
-            const res = await fetch(`${API}/auth/forgot-password`, {
+            const res = await fetch(`${API}/auth/reset-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ email: resetEmail, otp, newPassword }),
             });
 
             const data = await res.json();
             if (!res.ok) return showMessage(data.message || 'Erreur.');
 
-            // Afficher étape 2 — saisir OTP + nouveau mot de passe
-            resetForm.innerHTML = `
-                <div class="form-group">
-                    <label>Code OTP reçu par email</label>
-                    <input type="text" id="otp-code" placeholder="Ex: 483920" maxlength="6" />
-                </div>
-                <div class="form-group">
-                    <label>Nouveau mot de passe</label>
-                    <input type="password" id="new-password" placeholder="Minimum 8 caractères" />
-                </div>
-                <button type="submit" class="btn-primary btn-full" data-label="Réinitialiser">Réinitialiser</button>
-            `;
-
-            resetForm.removeEventListener('submit', arguments.callee);
-
-            resetForm.addEventListener('submit', async (e2) => {
-                e2.preventDefault();
-
-                const otp = document.getElementById('otp-code').value.trim();
-                const newPassword = document.getElementById('new-password').value;
-
-                if (!otp || !newPassword) return showMessage('Veuillez remplir tous les champs.');
-
-                try {
-                    const res2 = await fetch(`${API}/auth/reset-password`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email, otp, newPassword }),
-                    });
-
-                    const data2 = await res2.json();
-                    if (!res2.ok) return showMessage(data2.message || 'Erreur.');
-
-                    showMessage('Mot de passe réinitialisé !', 'success');
-                    setTimeout(() => window.location.href = 'login.html', 2000);
-
-                } catch {
-                    showMessage('Impossible de contacter le serveur.');
-                }
-            });
-
-            showMessage('Code OTP envoyé à ' + email, 'success');
-
+            showMessage('Mot de passe réinitialisé !', 'success');
+            setTimeout(() => window.location.href = '/login', 2000);
         } catch {
             showMessage('Impossible de contacter le serveur.');
         } finally {
-            setLoading(submitBtn, false);
+            if (confirmBtn) {
+                setLoading(confirmBtn, false);
+            }
         }
     });
 }

@@ -17,7 +17,7 @@ const API = resolveApiBase();
 
 const token = localStorage.getItem('token');
 const userRaw = localStorage.getItem('user');
-if (!token || !userRaw) window.location.href = 'login.html';
+if (!token || !userRaw) window.location.href = '/login';
 
 const user = JSON.parse(userRaw);
 
@@ -40,7 +40,7 @@ if (avatarEl) avatarEl.textContent = user.prenom[0].toUpperCase() + user.nom[0].
 document.getElementById('logout-btn')?.addEventListener('click', () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    window.location.href = 'login.html';
+    window.location.href = '/login';
 });
 
 document.getElementById('sidebar-toggle')?.addEventListener('click', () => {
@@ -186,7 +186,7 @@ document.getElementById('confirm-order')?.addEventListener('click', async () => 
         return;
     }
 
-    const destination = selectedType === 'achat' ? 'acheter.html' : 'vendre.html';
+    const destination = selectedType === 'achat' ? '/acheter' : '/vendre';
     const params = new URLSearchParams({
         crypto: selectedCoin.symbol.toUpperCase(),
         amount: String(amount),

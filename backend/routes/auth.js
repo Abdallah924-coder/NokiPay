@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { sendWelcome, sendOTP } = require('../utils/emails');
+const { getFrontendUrl } = require('../config/urls');
 
 // Inscription
 router.post('/register', async (req, res) => {
@@ -97,7 +98,7 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 
 // Callback Google
 router.get('/google/callback',
-    passport.authenticate('google', { failureRedirect: `${process.env.FRONTEND_URL}/login.html` }),
+    passport.authenticate('google', { failureRedirect: `${getFrontendUrl()}/login` }),
     async (req, res) => {
         try {
             const jwt = require('jsonwebtoken');
@@ -116,9 +117,9 @@ router.get('/google/callback',
                 role: req.user.role,
             };
 
-            res.redirect(`${process.env.FRONTEND_URL}/dashboard.html?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`);
+            res.redirect(`${getFrontendUrl()}/dashboard?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`);
         } catch (error) {
-            res.redirect(`${process.env.FRONTEND_URL}/login.html`);
+            res.redirect(`${getFrontendUrl()}/login`);
         }
     }
 );

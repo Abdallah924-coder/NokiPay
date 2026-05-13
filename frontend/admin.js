@@ -18,10 +18,10 @@ const API = resolveApiBase();
 const token = localStorage.getItem('token');
 const userRaw = localStorage.getItem('user');
 
-if (!token || !userRaw) window.location.href = 'login.html';
+if (!token || !userRaw) window.location.href = '/login';
 
 const user = JSON.parse(userRaw);
-if (user.role !== 'admin') window.location.href = 'dashboard.html';
+if (user.role !== 'admin') window.location.href = '/dashboard';
 
 function typeLabel(type) {
     return type === 'buy' ? 'Achat' : type === 'sell' ? 'Vente' : type === 'exchange' ? 'Echange' : type;
@@ -44,7 +44,7 @@ document.getElementById('admin-date').textContent = new Date().toLocaleDateStrin
 document.getElementById('logout-btn').addEventListener('click', () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    window.location.href = 'login.html';
+    window.location.href = '/login';
 });
 
 document.getElementById('sidebar-toggle')?.addEventListener('click', () => {

@@ -50,7 +50,7 @@ const sendWelcome = async (user) => {
             `Bienvenue ${user.prenom} !`,
             `
             <p style="color:#8A8578;line-height:1.7;">Votre compte NokiPay a été créé avec succès. Vous pouvez maintenant acheter, vendre et échanger vos cryptomonnaies.</p>
-            <a href="${process.env.FRONTEND_URL}/login.html" style="display:inline-block;margin-top:24px;background:#E8C96A;color:#000;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;">Accéder à mon compte</a>
+            <a href="${getFrontendUrl()}/login" style="display:inline-block;margin-top:24px;background:#E8C96A;color:#000;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;">Accéder à mon compte</a>
             `
         ),
     });
@@ -129,3 +129,4 @@ module.exports = {
     sendTransactionValidated,
     sendAdminAlert,
 };
+const { getFrontendUrl } = require('../config/urls');
