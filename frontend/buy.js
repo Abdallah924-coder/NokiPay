@@ -15,6 +15,22 @@ function resolveApiBase() {
 
 const API = resolveApiBase();
 const TOKEN = localStorage.getItem('token');
+const USER_RAW = localStorage.getItem('user');
+const PROTECTED_TRANSACTION_PAGES = new Set([
+    '/acheter',
+    '/acheter.html',
+    '/vendre',
+    '/vendre.html',
+    '/echanger',
+    '/echanger.html',
+    '/attente',
+    '/attente.html',
+]);
+
+if (PROTECTED_TRANSACTION_PAGES.has(window.location.pathname) && (!TOKEN || !USER_RAW)) {
+    window.location.href = '/login';
+}
+
 const SUCCESSFUL_PAYMENT_STATUSES = new Set(['SUCCESS', 'SUCCESSFUL', 'COMPLETED', 'PAID']);
 const FAILED_PAYMENT_STATUSES = new Set(['FAILED', 'CANCELLED']);
 const PRICE_MAP = {
@@ -304,7 +320,9 @@ async function initBuyPage() {
             if (!response.ok) throw new Error(data.message || 'Impossible d’initier le paiement OpenPay.');
 
             paymentStep.classList.add('active');
-            paymentStep.dataset.reference = data.referenceId;
+            const statusReference = data.statusReference || data.providerTransactionId || data.referenceId;
+            paymentStep.dataset.reference = statusReference;
+            paymentStep.dataset.displayReference = data.referenceId || statusReference || '';
             const sentTo = data.recipientPhone ? ` au numero ${data.recipientPhone}` : '';
             showBox(paymentMessage, `Paiement OpenPay lance.${sentTo} Le client doit valider la demande sur son telephone.`, 'success');
             showBox(paymentStatusNote, 'OpenPay a bien repondu a l’initialisation. Verification automatique en cours pendant que le client valide la demande.', 'success');
@@ -312,7 +330,7 @@ async function initBuyPage() {
             const normalizedInitStatus = `${data.status || ''}`.toUpperCase();
             if (SUCCESSFUL_PAYMENT_STATUSES.has(normalizedInitStatus)) {
                 deliveryStep.classList.add('active');
-                deliveryStep.dataset.paymentReference = data.referenceId;
+                deliveryStep.dataset.paymentReference = statusReference;
                 setDeliveryAccess(true);
                 showBox(paymentMessage, 'Paiement confirmé immédiatement par OpenPay. Vous pouvez finaliser la commande.', 'success');
                 showBox(paymentStatusNote, 'Succès: le paiement a déjà été confirmé par OpenPay.', 'success');

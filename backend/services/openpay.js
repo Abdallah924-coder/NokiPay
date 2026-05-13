@@ -134,20 +134,52 @@ function logOpenPayError(stage, details) {
     console.error('[openpay]', JSON.stringify(payload));
 }
 
-function extractReferenceId(data, fallbackReference) {
-    return data?.reference
-        || data?.referenceId
-        || data?.reference_id
-        || data?.transactionId
-        || data?.transaction_id
-        || data?.id
-        || data?.data?.reference
-        || data?.data?.referenceId
-        || data?.data?.reference_id
-        || data?.data?.transactionId
-        || data?.data?.transaction_id
-        || data?.data?.id
-        || fallbackReference;
+function firstNonEmpty(...values) {
+    for (const value of values) {
+        if (typeof value === 'string' && value.trim()) {
+            return value.trim();
+        }
+        if (typeof value === 'number' && Number.isFinite(value)) {
+            return `${value}`;
+        }
+    }
+    return '';
+}
+
+function extractReferenceId(data, fallbackReference = '') {
+    return firstNonEmpty(
+        data?.reference,
+        data?.referenceId,
+        data?.reference_id,
+        data?.data?.reference,
+        data?.data?.referenceId,
+        data?.data?.reference_id,
+        fallbackReference,
+    );
+}
+
+function extractProviderTransactionId(data, fallbackReference = '') {
+    return firstNonEmpty(
+        data?.id_provider_external_transaction,
+        data?.idProviderExternalTransaction,
+        data?.provider_external_transaction_id,
+        data?.providerExternalTransactionId,
+        data?.provider_transaction_id,
+        data?.providerTransactionId,
+        data?.transactionId,
+        data?.transaction_id,
+        data?.id,
+        data?.data?.id_provider_external_transaction,
+        data?.data?.idProviderExternalTransaction,
+        data?.data?.provider_external_transaction_id,
+        data?.data?.providerExternalTransactionId,
+        data?.data?.provider_transaction_id,
+        data?.data?.providerTransactionId,
+        data?.data?.transactionId,
+        data?.data?.transaction_id,
+        data?.data?.id,
+        fallbackReference,
+    );
 }
 
 function extractStatus(data, fallbackStatus = 'PENDING') {
@@ -208,8 +240,14 @@ async function initiatePaymentRequest({ amountFcfa, phone, externalId, customerN
     }
 
     const referenceId = extractReferenceId(data, externalId);
+    const providerTransactionId = extractProviderTransactionId(data);
+    const statusReference = providerTransactionId || referenceId || externalId;
+
     return {
         referenceId,
+        statusReference,
+        providerTransactionId,
+        externalId,
         status: extractStatus(data),
         provider: PAYMENT_PROVIDER_NAME,
         recipientPhone: normalizePhone(phone),
@@ -268,6 +306,7 @@ async function getPaymentStatus(referenceId) {
 
         return {
             referenceId: extractReferenceId(data, referenceId),
+            statusReference: extractProviderTransactionId(data, referenceId),
             status: extractStatus(data),
             provider: PAYMENT_PROVIDER_NAME,
             raw: data,

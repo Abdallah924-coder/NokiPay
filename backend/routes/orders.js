@@ -5,7 +5,6 @@ const express = require('express');
 const Order = require('../models/Order');
 const User = require('../models/User');
 const authMiddleware = require('../middleware/auth');
-const optionalAuth = require('../middleware/optionalAuth');
 const { RATES, getNetworks, getDepositAddress } = require('../config/transactions');
 const { initiatePaymentRequest, getPaymentStatus, PAYMENT_PROVIDER_NAME } = require('../services/openpay');
 const { sendTransactionPending, sendTransactionValidated, sendAdminAlert } = require('../utils/emails');
@@ -147,7 +146,7 @@ router.get('/meta', async (_req, res) => {
     });
 });
 
-router.post('/payment/initiate', optionalAuth, async (req, res) => {
+router.post('/payment/initiate', authMiddleware, async (req, res) => {
     try {
         const { phone, amountFcfa, email, type } = req.body;
         if (!phone || !amountFcfa || !email) {
@@ -171,7 +170,7 @@ router.post('/payment/initiate', optionalAuth, async (req, res) => {
     }
 });
 
-router.get('/payment/:referenceId', optionalAuth, async (req, res) => {
+router.get('/payment/:referenceId', authMiddleware, async (req, res) => {
     try {
         const data = await getPaymentStatus(req.params.referenceId);
         res.json(data);
@@ -217,7 +216,7 @@ router.post('/payment/callback', async (req, res) => {
     }
 });
 
-router.post('/', optionalAuth, async (req, res) => {
+router.post('/', authMiddleware, async (req, res) => {
     try {
         const type = req.body.type;
         if (!['buy', 'sell', 'exchange'].includes(type)) {

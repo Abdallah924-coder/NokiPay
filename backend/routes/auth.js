@@ -117,7 +117,7 @@ router.get('/google/callback',
                 role: req.user.role,
             };
 
-            res.redirect(`${getFrontendUrl()}/dashboard?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`);
+            res.redirect(`${getFrontendUrl()}/login?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`);
         } catch (error) {
             res.redirect(`${getFrontendUrl()}/login`);
         }

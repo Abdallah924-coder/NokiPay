@@ -26,14 +26,8 @@ function resolveApiBase() {
 }
 
 const API = resolveApiBase();
-const existingToken = localStorage.getItem('token');
 const AUTH_PAGES = new Set(['/login', '/register', '/login.html', '/register.html']);
 
-if (existingToken && AUTH_PAGES.has(window.location.pathname)) {
-    window.location.href = '/dashboard';
-}
-
-// Récupérer token Google après callback
 const urlParams = new URLSearchParams(window.location.search);
 const googleToken = urlParams.get('token');
 const googleUser = urlParams.get('user');
@@ -41,6 +35,11 @@ const googleUser = urlParams.get('user');
 if (googleToken && googleUser) {
     localStorage.setItem('token', googleToken);
     localStorage.setItem('user', googleUser);
+    window.location.href = '/dashboard';
+}
+
+const existingToken = localStorage.getItem('token');
+if (existingToken && AUTH_PAGES.has(window.location.pathname)) {
     window.location.href = '/dashboard';
 }
 
