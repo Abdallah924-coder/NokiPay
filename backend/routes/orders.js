@@ -69,6 +69,12 @@ function normalizePaymentStatus(status) {
     return `${status || ''}`.trim().toLowerCase();
 }
 
+function dispatchEmail(task, label) {
+    Promise.resolve(task).catch((error) => {
+        console.error(`[email:${label}]`, error.message);
+    });
+}
+
 function isSuccessfulPaymentStatus(status) {
     return normalizePaymentStatus(status) === 'success';
 }
@@ -355,8 +361,8 @@ router.post('/', authMiddleware, async (req, res) => {
 
         const order = await Order.create(orderPayload);
 
-        await sendTransactionPending(order.email, linkedUser?.prenom || firstNameFromEmail(order.email), order);
-        await sendAdminAlert(order);
+        dispatchEmail(sendTransactionPending(order.email, linkedUser?.prenom || firstNameFromEmail(order.email), order), 'transaction_pending');
+        dispatchEmail(sendAdminAlert(order), 'admin_alert');
 
         res.status(201).json({
             message: 'Transaction créée avec succès.',
@@ -416,7 +422,7 @@ router.put('/:id/status', authMiddleware, async (req, res) => {
         await order.save();
 
         if (status === 'validated') {
-            await sendTransactionValidated(order.email, order.user?.prenom || firstNameFromEmail(order.email), order);
+            dispatchEmail(sendTransactionValidated(order.email, order.user?.prenom || firstNameFromEmail(order.email), order), 'transaction_validated');
         }
 
         res.json({ message: 'Statut mis à jour', order: formatPublicOrder(order) });

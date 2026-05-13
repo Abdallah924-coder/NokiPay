@@ -6,6 +6,12 @@ const User = require('../models/User');
 const { sendWelcome, sendOTP } = require('../utils/emails');
 const { getFrontendUrl } = require('../config/urls');
 
+function dispatchEmail(task, label) {
+    Promise.resolve(task).catch((error) => {
+        console.error(`[email:${label}]`, error.message);
+    });
+}
+
 // Inscription
 router.post('/register', async (req, res) => {
     try {
@@ -17,7 +23,7 @@ router.post('/register', async (req, res) => {
         const hashed = await bcrypt.hash(password, 12);
         const user = await User.create({ nom, prenom, email, password: hashed, pays });
 
-        await sendWelcome(user);
+        dispatchEmail(sendWelcome(user), 'welcome_register');
 
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
 
@@ -117,6 +123,7 @@ router.get('/google/callback',
                 role: req.user.role,
             };
 
+            dispatchEmail(sendWelcome(req.user), 'welcome_google');
             res.redirect(`${getFrontendUrl()}/login?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`);
         } catch (error) {
             res.redirect(`${getFrontendUrl()}/login`);

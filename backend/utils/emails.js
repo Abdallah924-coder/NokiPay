@@ -1,4 +1,57 @@
 const transporter = require('../config/mailer');
+const { getFrontendUrl } = require('../config/urls');
+const { sendTelegramAdminAlert } = require('./telegram');
+
+const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
+
+function isBrevoEnabled() {
+    return !!`${process.env.BREVO_API_KEY || ''}`.trim();
+}
+
+async function sendMail({ to, subject, html, text, fromName = 'NokiPay' }) {
+    if (isBrevoEnabled()) {
+        const senderEmail = `${process.env.BREVO_SENDER_EMAIL || process.env.EMAIL_USER || ''}`.trim();
+        const senderName = `${process.env.BREVO_SENDER_NAME || fromName}`.trim() || 'NokiPay';
+
+        if (!senderEmail) {
+            throw new Error('Aucun expéditeur email configuré pour Brevo.');
+        }
+
+        const response = await fetch(BREVO_API_URL, {
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'api-key': process.env.BREVO_API_KEY,
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                sender: {
+                    name: senderName,
+                    email: senderEmail,
+                },
+                to: [{ email: to }],
+                subject,
+                htmlContent: html,
+                textContent: text || '',
+            }),
+        });
+
+        if (!response.ok) {
+            const errorBody = await response.text();
+            throw new Error(`Brevo API error (${response.status}): ${errorBody}`);
+        }
+
+        return;
+    }
+
+    await transporter.sendMail({
+        from: `"${fromName}" <${process.env.EMAIL_USER}>`,
+        to,
+        subject,
+        html,
+        text,
+    });
+}
 
 function appShell(title, body) {
     return `
@@ -42,84 +95,112 @@ function transactionSummary(order) {
 }
 
 const sendWelcome = async (user) => {
-    await transporter.sendMail({
-        from: `"NokiPay" <${process.env.EMAIL_USER}>`,
+    const subject = 'Bienvenue sur NokiPay';
+    const html = appShell(
+        `Bienvenue ${user.prenom} !`,
+        `
+        <p style="color:#8A8578;line-height:1.7;">Votre compte NokiPay a été créé avec succès. Vous pouvez maintenant acheter, vendre et échanger vos cryptomonnaies.</p>
+        <a href="${getFrontendUrl()}/login" style="display:inline-block;margin-top:24px;background:#E8C96A;color:#000;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;">Accéder à mon compte</a>
+        `
+    );
+    const text = `Bienvenue ${user.prenom || ''} sur NokiPay. Connectez-vous ici: ${getFrontendUrl()}/login`;
+
+    await sendMail({
         to: user.email,
-        subject: 'Bienvenue sur NokiPay',
-        html: appShell(
-            `Bienvenue ${user.prenom} !`,
-            `
-            <p style="color:#8A8578;line-height:1.7;">Votre compte NokiPay a été créé avec succès. Vous pouvez maintenant acheter, vendre et échanger vos cryptomonnaies.</p>
-            <a href="${getFrontendUrl()}/login" style="display:inline-block;margin-top:24px;background:#E8C96A;color:#000;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;">Accéder à mon compte</a>
-            `
-        ),
+        subject,
+        html,
+        text,
+        fromName: 'NokiPay',
     });
 };
 
 const sendOTP = async (user, otp) => {
-    await transporter.sendMail({
-        from: `"NokiPay" <${process.env.EMAIL_USER}>`,
+    const subject = 'Code de réinitialisation NokiPay';
+    const html = appShell(
+        'Réinitialisation du mot de passe',
+        `
+        <p style="color:#8A8578;line-height:1.7;">Voici votre code OTP valable 15 minutes :</p>
+        <div style="background:#222;border:1px solid #E8C96A;border-radius:12px;padding:24px;text-align:center;margin:24px 0;">
+            <span style="font-size:36px;font-weight:700;letter-spacing:12px;color:#E8C96A;">${otp}</span>
+        </div>
+        <p style="color:#8A8578;font-size:13px;">Si vous n'avez pas demandé cette réinitialisation, ignorez cet email.</p>
+        `
+    );
+    const text = `Votre code OTP NokiPay est: ${otp}. Il expire dans 15 minutes.`;
+
+    await sendMail({
         to: user.email,
-        subject: 'Code de réinitialisation NokiPay',
-        html: appShell(
-            'Réinitialisation du mot de passe',
-            `
-            <p style="color:#8A8578;line-height:1.7;">Voici votre code OTP valable 15 minutes :</p>
-            <div style="background:#222;border:1px solid #E8C96A;border-radius:12px;padding:24px;text-align:center;margin:24px 0;">
-                <span style="font-size:36px;font-weight:700;letter-spacing:12px;color:#E8C96A;">${otp}</span>
-            </div>
-            <p style="color:#8A8578;font-size:13px;">Si vous n'avez pas demandé cette réinitialisation, ignorez cet email.</p>
-            `
-        ),
+        subject,
+        html,
+        text,
+        fromName: 'NokiPay',
     });
 };
 
 const sendTransactionPending = async (email, firstName, order) => {
-    await transporter.sendMail({
-        from: `"NokiPay" <${process.env.EMAIL_USER}>`,
+    const subject = `${typeLabel(order.type)} en attente - ${order.reference}`;
+    const html = appShell(
+        'Votre transaction est en attente',
+        `
+        <p style="color:#8A8578;line-height:1.7;">Bonjour ${firstName || ''}, votre transaction a bien été reçue. Elle est maintenant en attente de vérification par notre équipe.</p>
+        ${transactionSummary(order)}
+        <p style="color:#8A8578;line-height:1.7;">Vous recevrez un nouvel email dès que la transaction sera confirmée par l’administrateur.</p>
+        `
+    );
+    const text = `Bonjour ${firstName || ''}, votre transaction ${order.reference} est en attente de vérification sur NokiPay.`;
+
+    await sendMail({
         to: email,
-        subject: `${typeLabel(order.type)} en attente - ${order.reference}`,
-        html: appShell(
-            'Votre transaction est en attente',
-            `
-            <p style="color:#8A8578;line-height:1.7;">Bonjour ${firstName || ''}, votre transaction a bien été reçue. Elle est maintenant en attente de vérification par notre équipe.</p>
-            ${transactionSummary(order)}
-            <p style="color:#8A8578;line-height:1.7;">Vous recevrez un nouvel email dès que la transaction sera confirmée par l’administrateur.</p>
-            `
-        ),
+        subject,
+        html,
+        text,
+        fromName: 'NokiPay',
     });
 };
 
 const sendTransactionValidated = async (email, firstName, order) => {
-    await transporter.sendMail({
-        from: `"NokiPay" <${process.env.EMAIL_USER}>`,
+    const subject = `${typeLabel(order.type)} confirmée - ${order.reference}`;
+    const html = appShell(
+        'Votre transaction a été confirmée',
+        `
+        <p style="color:#8A8578;line-height:1.7;">Bonjour ${firstName || ''}, votre transaction a été confirmée et traitée par l’équipe NokiPay.</p>
+        ${transactionSummary(order)}
+        <p style="color:#8A8578;line-height:1.7;">Merci d’avoir utilisé NokiPay.</p>
+        `
+    );
+    const text = `Bonjour ${firstName || ''}, votre transaction ${order.reference} a été confirmée par NokiPay.`;
+
+    await sendMail({
         to: email,
-        subject: `${typeLabel(order.type)} confirmée - ${order.reference}`,
-        html: appShell(
-            'Votre transaction a été confirmée',
-            `
-            <p style="color:#8A8578;line-height:1.7;">Bonjour ${firstName || ''}, votre transaction a été confirmée et traitée par l’équipe NokiPay.</p>
-            ${transactionSummary(order)}
-            <p style="color:#8A8578;line-height:1.7;">Merci d’avoir utilisé NokiPay.</p>
-            `
-        ),
+        subject,
+        html,
+        text,
+        fromName: 'NokiPay',
     });
 };
 
 const sendAdminAlert = async (order) => {
-    await transporter.sendMail({
-        from: `"NokiPay Admin" <${process.env.EMAIL_USER}>`,
-        to: process.env.EMAIL_USER,
-        subject: `Nouvelle transaction ${typeLabel(order.type)} - ${order.reference}`,
-        html: appShell(
-            'Nouvelle transaction reçue',
-            `
-            <p style="color:#8A8578;line-height:1.7;">Une nouvelle transaction client nécessite une vérification dans le panel admin.</p>
-            ${transactionSummary(order)}
-            <p style="color:#8A8578;line-height:1.7;">Email client : <span style="color:#fff;">${order.email}</span><br>Téléphone : <span style="color:#fff;">${order.phone}</span></p>
-            `
-        ),
-    });
+    const subject = `Nouvelle transaction ${typeLabel(order.type)} - ${order.reference}`;
+    const html = appShell(
+        'Nouvelle transaction reçue',
+        `
+        <p style="color:#8A8578;line-height:1.7;">Une nouvelle transaction client nécessite une vérification dans le panel admin.</p>
+        ${transactionSummary(order)}
+        <p style="color:#8A8578;line-height:1.7;">Email client : <span style="color:#fff;">${order.email}</span><br>Téléphone : <span style="color:#fff;">${order.phone}</span></p>
+        `
+    );
+    const text = `Nouvelle transaction ${typeLabel(order.type)} ${order.reference}. Client: ${order.email}. Ouvrir le panel admin pour validation.`;
+
+    await Promise.all([
+        sendMail({
+            to: process.env.ADMIN_ALERT_EMAIL || process.env.EMAIL_USER,
+            subject,
+            html,
+            text,
+            fromName: 'NokiPay Admin',
+        }),
+        sendTelegramAdminAlert(order),
+    ]);
 };
 
 module.exports = {
@@ -129,4 +210,3 @@ module.exports = {
     sendTransactionValidated,
     sendAdminAlert,
 };
-const { getFrontendUrl } = require('../config/urls');

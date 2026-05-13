@@ -22,9 +22,6 @@ passport.use(new GoogleStrategy({
             isVerified: true,
         });
 
-        const { sendWelcome } = require('../utils/emails');
-        await sendWelcome(user);
-
         return done(null, user);
     } catch (error) {
         return done(error, null);
