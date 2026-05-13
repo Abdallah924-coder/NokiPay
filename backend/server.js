@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const connectMongo = require('connect-mongo');
 const path = require('path');
 const passport = require('./config/passport');
 const connectDB = require('./config/db');
@@ -13,6 +13,10 @@ const app = express();
 const frontendDir = path.join(__dirname, '..', 'frontend');
 const frontendUrl = getFrontendUrl();
 const isProduction = process.env.NODE_ENV === 'production';
+const MongoStore =
+    connectMongo.default ||
+    connectMongo.MongoStore ||
+    connectMongo;
 
 connectDB();
 app.set('trust proxy', 1);
